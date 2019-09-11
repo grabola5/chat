@@ -5,6 +5,9 @@ const socketIo = require('socket.io');
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server); //podpinamy socketIo do serwera
+const UsersService = require('./UsersService');
+
+const usersService = new UsersService();
 
 app.use(express.static(`${_dirname}/public`));
 
