@@ -26,7 +26,23 @@ io.on('connection', (socket) => {
       users: usersService.getAllUsers()
     });
   });
-})
+  //obsługa przerwania połączenia
+  socket.on('disconnect', () => {
+    usersService.removeUser(socket.id);
+    socket.broadcast.emit('update', {
+      users: usersService.getAllUsers()
+    });
+  });
+
+  //obsługa wysłania wiadomości
+  socket.on('message', (message) => {
+    const {name} = usersService.getUserById(socket.id);
+    socket.broadcast.emit('message', {
+      text: message.text,
+      from: name
+    });
+  });
+});
 
 server.listen(3000, () => {
   console.log('listening on *:3000');
