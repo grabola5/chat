@@ -5,8 +5,8 @@ import style from './App.css';
 
 //import MessageForm from './MessageForm';
 //import MessageList from './MessageList';
-//import Userslist from './UsersList';
-//import UserForm from './UserForm';
+import Userslist from './UsersList';
+import UserForm from './UserForm';
 
 //nawiązanie połączenia z przestrzenią nazw czyli ('/')
 const socket = io('/');
