@@ -11,7 +11,7 @@ class MessageForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
     const message = {
-      from: this.state.name,
+      from: this.props.name,
       text: this.state.text
     };
     this.props.onMessageSubmit(message);

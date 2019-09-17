@@ -29,15 +29,19 @@ io.on('connection', (socket) => {
       users: usersService.getAllUsers()
     });
   });
+});
   //obsługa przerwania połączenia
+io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     usersService.removeUser(socket.id);
     socket.broadcast.emit('update', {
       users: usersService.getAllUsers()
     });
   });
+});
 
   //obsługa wysłania wiadomości
+io.on('connection', (socket) => {
   socket.on('message', (message) => {
     const {name} = usersService.getUserById(socket.id);
     socket.broadcast.emit('message', {

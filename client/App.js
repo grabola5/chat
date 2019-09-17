@@ -5,7 +5,7 @@ import styles from './App.css';
 
 import MessageForm from './MessageForm';
 import MessageList from './MessageList';
-import Userslist from './UsersList';
+import UsersList from './UsersList';
 import UserForm from './UserForm';
 
 //nawiązanie połączenia z przestrzenią nazw czyli ('/')
@@ -17,9 +17,29 @@ class App extends Component {
     this.state = {users: [], messages: [], text: '', name: ''};
   }
 
-  ComponentDidMount() {
+  componentDidMount() {
     socket.on('message', message => this.messageReceive(message));
     socket.on('update', ({users}) => this.chatUpdate(users));
+  }
+
+  messageReceive(message) {
+    const messages = [message, ...this.state.messages];
+    this.setState({messages});
+  }
+
+  chatUpdate(users) {
+    this.setState({users});
+  }
+
+  handleMessageSubmit(message) {
+    const messages = [message, ...this.state.messages];
+    this.setState({messages});
+    socket.emit('message', message);
+  }
+
+  handleUserSubmit(name) {
+    this.setState({name});
+    socket.emit('join', name);
   }
 
   render() {
@@ -52,25 +72,6 @@ class App extends Component {
     return (<UserForm onUserSubmit={name => this.handleUserSubmit(name)}/>)
   }
 
-  messageReceive(message) {
-    const messages = [message, ...this.state.messages];
-    this.setState({messages});
-  }
-
-  chatUpdate(users) {
-    this.setState({users});
-  }
-
-  handleMessageSubmit(message) {
-    const messages = [message, ...this.state.messages];
-    this.setState({messages});
-    socket.emit('message', message);
-  }
-
-  handleUserSubmit(name) {
-    this.setState({name});
-    socket.emit('join', name);
-  }
 };
 
 export default hot(module)(App);
