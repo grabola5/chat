@@ -3,7 +3,7 @@ import { hot } from 'react-hot-loader';
 import io from 'socket.io-client';
 import style from './App.css';
 
-//import MessageForm from './MessageForm';
+import MessageForm from './MessageForm';
 import MessageList from './MessageList';
 import Userslist from './UsersList';
 import UserForm from './UserForm';
