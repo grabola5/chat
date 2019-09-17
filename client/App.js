@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { hot } from 'react-hot-loader';
 import io from 'socket.io-client';
-import style from './App.css';
+import styles from './App.css';
 
 import MessageForm from './MessageForm';
 import MessageList from './MessageList';
@@ -25,7 +25,7 @@ class App extends Component {
   render() {
     //jeśli this.state.name nie jest puste to renderujemy aplikację, w przeciwnym wypadku - formularz do wpisania nazwy
     //<warunek_do_sprawdzenia> ? <przypadek_true> : <przypadek_false>
-    return this.state.name !=='' ? this.renderLayout() : this.renderUserForm();
+    return this.state.name !== '' ? this.renderLayout() : this.renderUserForm();
   }
 
   renderLayout() {
